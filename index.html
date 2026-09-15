@@ -119,54 +119,6 @@
   .g4 { grid-template-columns: repeat(4,1fr); }
   @media (max-width: 1080px) { .g2,.g3,.g4 { grid-template-columns: 1fr; } }
 
-  /* ============ 手机端布局 ============ */
-  @media (max-width: 768px) {
-    body { flex-direction: column; overflow: auto; }
-    .sidebar {
-      width: 100%; flex-direction: row; align-items: center; gap: 10px;
-      padding: calc(10px + env(safe-area-inset-top)) 14px 10px;
-      border-right: none; border-bottom: 1px solid var(--line);
-      position: sticky; top: 0; z-index: 30; flex-shrink: 0;
-    }
-    .brand { padding: 0; }
-    .brand .sub { display: none; }
-    .nav-label { display: none; }
-    .nav-item[data-view] { display: none; }
-    .nav-sub { display: none !important; }
-    .members { margin: 0 0 0 auto; padding-top: 0; border-top: none; flex-direction: row; gap: 8px; }
-    .member { padding: 3px; }
-    .member .mname, .member .mrole { display: none; }
-    .member .avatar { width: 38px; height: 38px; }
-    .main { overflow: visible; border-radius: 0; }
-    .topbar { height: auto; padding: 12px 16px; flex-direction: column; align-items: flex-start; gap: 6px; }
-    .content { overflow: visible; padding: 16px 16px 92px; }
-    .hero { flex-direction: column; align-items: stretch; gap: 14px; }
-    .hero .btn { width: 100%; justify-content: center; }
-    .grid { gap: 14px; }
-    .card { padding: 16px; }
-    .meeting-code { font-size: 26px; }
-    .now-playing { flex-wrap: wrap; }
-    .split-tabs { position: sticky; top: 0; background: var(--bg); padding: 4px 0 10px; z-index: 5; }
-    .split-tab { flex: 1; text-align: center; }
-    .install-fab { right: 16px; bottom: calc(88px + env(safe-area-inset-bottom)); }
-
-    .mobile-nav {
-      display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 40;
-      background: var(--bg-soft); border-top: 1px solid var(--line);
-      justify-content: space-around; align-items: center;
-      padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
-      box-shadow: 0 -6px 20px rgba(0,0,0,.35);
-    }
-    .mnav-item {
-      display: flex; flex-direction: column; align-items: center; gap: 3px;
-      font-size: 11px; color: var(--txt-dim); cursor: pointer; flex: 1; padding: 4px 0;
-      transition: color .15s;
-    }
-    .mnav-item .mi { font-size: 21px; line-height: 1; }
-    .mnav-item.active { color: var(--accent); }
-    .mnav-item.active .mi { transform: translateY(-1px); }
-  }
-
   .card {
     background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
     padding: 20px; box-shadow: var(--shadow);
@@ -297,7 +249,8 @@
 
   .toast { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%) translateY(20px);
     background: var(--panel-2); border: 1px solid var(--line); padding: 13px 20px; border-radius: 12px;
-    box-shadow: var(--shadow); opacity: 0; transition: .25s; z-index: 50; font-size: 14px; max-width: 80vw; }
+    box-shadow: var(--shadow); opacity: 0; transition: .25s; z-index: 50; font-size: 14px; max-width: 80vw;
+    pointer-events: none; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
   .calendar { display: grid; grid-template-columns: repeat(7,1fr); gap: 5px; margin-top: 12px; }
@@ -312,6 +265,54 @@
   .subview.on { display: block; }
 
   .empty { color: var(--txt-dim); font-size: 13px; text-align: center; padding: 20px; }
+
+  /* ============ 手机端布局（置于所有样式之后，确保覆盖生效） ============ */
+  @media (max-width: 768px) {
+    body { flex-direction: column; overflow: auto; }
+    .sidebar {
+      width: 100%; flex-direction: row; align-items: center; gap: 10px;
+      padding: calc(10px + env(safe-area-inset-top)) 14px 10px;
+      border-right: none; border-bottom: 1px solid var(--line);
+      position: sticky; top: 0; z-index: 30; flex-shrink: 0;
+    }
+    .brand { padding: 0; }
+    .brand .sub { display: none; }
+    .nav-label { display: none; }
+    .nav-item[data-view] { display: none; }
+    .nav-sub { display: none !important; }
+    .members { margin: 0 0 0 auto; padding-top: 0; border-top: none; flex-direction: row; gap: 8px; }
+    .member { padding: 3px; }
+    .member .mname, .member .mrole { display: none; }
+    .member .avatar { width: 38px; height: 38px; }
+    .main { overflow: visible; border-radius: 0; }
+    .topbar { height: auto; padding: 12px 16px; flex-direction: column; align-items: flex-start; gap: 6px; }
+    .content { overflow: visible; padding: 16px 16px 92px; }
+    .hero { flex-direction: column; align-items: stretch; gap: 14px; }
+    .hero .btn { width: 100%; justify-content: center; }
+    .grid { gap: 14px; }
+    .card { padding: 16px; }
+    .meeting-code { font-size: 26px; }
+    .now-playing { flex-wrap: wrap; }
+    .split-tabs { position: sticky; top: 0; background: var(--bg); padding: 4px 0 10px; z-index: 5; }
+    .split-tab { flex: 1; text-align: center; }
+    .install-fab { right: 16px; bottom: calc(88px + env(safe-area-inset-bottom)); }
+
+    .mobile-nav {
+      display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 40;
+      background: var(--bg-soft); border-top: 1px solid var(--line);
+      justify-content: space-around; align-items: center;
+      padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
+      box-shadow: 0 -6px 20px rgba(0,0,0,.35);
+    }
+    .mnav-item {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      font-size: 11px; color: var(--txt-dim); cursor: pointer; flex: 1; padding: 4px 0;
+      transition: color .15s;
+    }
+    .mnav-item .mi { font-size: 21px; line-height: 1; }
+    .mnav-item.active { color: var(--accent); }
+    .mnav-item.active .mi { transform: translateY(-1px); }
+  }
 </style>
 </head>
 <body>
@@ -580,7 +581,10 @@ function defaultMemberData(){
 let DB = JSON.parse(localStorage.getItem(STORE) || "null");
 if(!DB){ DB = {}; members.forEach(m=> DB[m.id]=defaultMemberData()); }
 function save(){ localStorage.setItem(STORE, JSON.stringify(DB)); }
-function curMember(){ return document.querySelector(".member.active").dataset.id; }
+function curMember(){
+  const el = document.querySelector(".member.active");
+  return el ? el.dataset.id : "m1";   /* 初次渲染时列表尚未建立，回退到第一个成员 */
+}
 function md(){ return DB[curMember()]; }
 const todayStr = new Date().toISOString().slice(0,10);
 
